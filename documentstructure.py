@@ -34,12 +34,7 @@ class DocumentStructure():
         return bodyString
 
     def addPage(self):
-        print("adding page to document")
-
         page = self.pageTree.addPage()
-        # print(page)
-        # print(self.objects)
         self.objects.append(page)
-        # print(self.objects)
 
 
