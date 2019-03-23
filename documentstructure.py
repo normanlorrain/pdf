@@ -26,12 +26,28 @@ class DocumentStructure():
         self.objects.append( self.outline )
         self.objects.append( self.pageTree )
 
-    def __repr__(self):
+    # Serialize the objects in our structure. At the same time build the cross reference table.
+    def generateBody(self, offsetInit ):
+        offset = offsetInit
         bodyString = ""
-        for pdfObject in self.objects:
-            bodyString += str(pdfObject)
 
-        return bodyString
+        # Cross reference, indicated by "xref". For new doc, only have one of these "sections", 
+        # next line indicates number of subsection (always 0 in our case), 
+        # and number of entries to follow
+        # See 3.4.3 in spec.
+        xref = f"""xref
+0 {len(self.objects)+1}
+0000000000 65535 f
+"""
+        for pdfObject in self.objects:
+            objectString = str(pdfObject)
+            bodyString += objectString
+            xref += f'{offset:010} 00000 n\n'
+            offset += len(objectString)
+
+        
+        return bodyString, xref
+
 
     def addPage(self):
         page = self.pageTree.addPage()

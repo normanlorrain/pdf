@@ -1,14 +1,28 @@
 import trailer
+_HEADER="%PDF-1.7\n"
 
+# See section 3.4 in spec.
 class FileStructure():
     def __init__(self, documentStructure ):
-        self.header="%PDF-1.7\n"
         self.ds=documentStructure
-        self.xref=""
-        self.trailer=trailer.Trailer()
-        pass
+        
 
     def __repr__(self):
-        return self.header + str(self.ds) + self.xref + str(self.trailer)
+        # generating cross reference requires the beginning of the offset
+        bodyOffset = len(_HEADER)
+        body, xref = self.ds.generateBody( bodyOffset )
+        xrefOffset = bodyOffset + len(body)
+        return _HEADER + body + xref + self.generateTrailer(xrefOffset)
+
+    def generateTrailer(self, xrefOffset):
+        return f"""trailer
+<< /Size {len(self.ds.objects)+1}
+   /Root {self.ds.catalog.objectNumber}
+>>
+startxref
+{xrefOffset}
+%%EOF"""
+
+ 
     
 

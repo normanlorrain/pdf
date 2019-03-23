@@ -12,8 +12,6 @@ class PageTree():
     << /Type /Pages
        /Kids {self.listKids()}
        /Count {self.count}
-       /MediaBox [0 0 612 792]
-       /Resources << >>
     >>
 endobj
 
