@@ -4,7 +4,6 @@ from page import Page
 class PageTree():
     def __init__(self, documentStructure):
         self.objectNumber = ds.nextObjectNumber()
-        self.ds = documentStructure
         self.kids = []
         self.count = 0
 
@@ -13,6 +12,8 @@ class PageTree():
     << /Type /Pages
        /Kids {self.listKids()}
        /Count {self.count}
+       /MediaBox [0 0 612 792]
+       /Resources << >>
     >>
 endobj
 
