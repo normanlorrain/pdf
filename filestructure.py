@@ -1,4 +1,3 @@
-import trailer
 _HEADER="%PDF-1.7\n"
 
 # See section 3.4 in spec.
