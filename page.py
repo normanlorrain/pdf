@@ -14,7 +14,7 @@ class Page():
     def __repr__(self):
         return f"""{self.objectNumber} 0 obj
     << /Type /Page
-       /Parent {self.parent} 0 R
+       /Parent {self.parent.objectNumber} 0 R
        /MediaBox [0 0 612 792]
        /Contents {self.contentsObjectNumber} 0 R
        /Resources << /ProcSet {self.resourceObjectNumber} 0 R >>
