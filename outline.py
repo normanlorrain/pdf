@@ -1,10 +1,10 @@
 # Outline is a structure of bookmarks.  See sec. 8.2.2
 
-import documentstructure as ds
 class Outline():
-    def __init__(self):
+    def __init__(self, ds):
         self.objectNumber = ds.nextObjectNumber()
         self.count = 0
+        ds.objects.append(self)
 
 
     def __repr__(self):

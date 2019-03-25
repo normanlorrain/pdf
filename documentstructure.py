@@ -2,29 +2,22 @@ from catalog import Catalog
 from outline import Outline
 from pagetree import PageTree
 
-
-def nextObjectNumber():
-    nextObjectNumber.n+=1
-    return nextObjectNumber.n
-nextObjectNumber.n = 0
-
-
-
-
-
-
 class DocumentStructure():
     def __init__(self):
+        self._objectNumber = 0
         self.objects = list()
-        self.catalog = Catalog()
-        self.outline = Outline()
+        self.catalog = Catalog(self)
+        self.outline = Outline(self)
         self.pageTree = PageTree(self)
         self.catalog.outlinesNumber = self.outline.objectNumber
         self.catalog.pageTreeNumber = self.pageTree.objectNumber
+
+
+    def nextObjectNumber(self,):
+        self._objectNumber += 1
+        return self._objectNumber
         
-        self.objects.append( self.catalog )
-        self.objects.append( self.outline )
-        self.objects.append( self.pageTree )
+
 
     # Serialize the objects in our structure. At the same time build the cross reference table.
     def generateBody(self, offsetInit ):
@@ -51,6 +44,6 @@ class DocumentStructure():
 
     def addPage(self):
         page = self.pageTree.addPage()
-        self.objects.append(page)
+        return page
 
 

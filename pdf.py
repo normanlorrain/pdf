@@ -9,6 +9,6 @@ class File():
         #print(dir(self.ds))
     def addPage(self):
         print("adding page to pdf file ")
-        self.ds.addPage()
+        return self.ds.addPage()
 
 

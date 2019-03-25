@@ -2,7 +2,8 @@ import pdf
 
 pdfFile = pdf.File()
 #print( pdfFile.fs )
-pdfFile.addPage()
+page = pdfFile.addPage()
+page.addContents()
 
 raw = str(pdfFile.fs)
 print( raw )
@@ -10,4 +11,5 @@ print( raw )
 f = open('test.pdf', 'w', newline='\n')
 
 f.write(raw)
+f.close()
 

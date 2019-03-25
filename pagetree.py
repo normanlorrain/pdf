@@ -1,11 +1,13 @@
-import documentstructure as ds
 from page import Page
 
 class PageTree():
-    def __init__(self, documentStructure):
+    def __init__(self, ds):
         self.objectNumber = ds.nextObjectNumber()
         self.kids = []
         self.count = 0
+        ds.objects.append(self)
+        self.ds = ds
+
 
     def __repr__(self):
         return f"""{self.objectNumber} 0 obj
@@ -27,7 +29,7 @@ endobj
     def addPage(self):
         print("adding page to tree")
 
-        newPage = Page(self.objectNumber)
+        newPage = Page(self)
         self.kids.append(newPage)
         self.count += 1
         return newPage

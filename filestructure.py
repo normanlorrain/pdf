@@ -1,4 +1,4 @@
-_HEADER="%PDF-1.7\n"
+_HEADER="%PDF-1.4\n"
 
 # See section 3.4 in spec.
 class FileStructure():
@@ -16,7 +16,7 @@ class FileStructure():
     def generateTrailer(self, xrefOffset):
         return f"""trailer
 << /Size {len(self.ds.objects)+1}
-   /Root {self.ds.catalog.objectNumber}
+   /Root {self.ds.catalog.objectNumber} 0 R
 >>
 startxref
 {xrefOffset}
