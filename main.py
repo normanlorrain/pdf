@@ -1,15 +1,14 @@
 import pdf
 
 pdfFile = pdf.File()
-#print( pdfFile.fs )
 page = pdfFile.addPage()
-page.addContents()
+page.addContents("BT\n/F1 72 Tf\n100 100 Td\n1 Tr\n(Hello World) Tj\nET")
 
-raw = str(pdfFile.fs)
-print( raw )
+fileStructure = str(pdfFile.fs)
+print( fileStructure )
 
 f = open('test.pdf', 'w', newline='\n')
 
-f.write(raw)
+f.write( fileStructure )
 f.close()
 
