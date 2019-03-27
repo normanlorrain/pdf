@@ -38,7 +38,7 @@ class DocumentStructure():
             xref += f'{offset:010} 00000 n\n'
             offset += len(objectString)
 
-        
+        xref += '\n'
         return bodyString, xref
 
 
