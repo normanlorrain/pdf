@@ -2,7 +2,7 @@
 # Wed have the Adobe Font Metrics stored in this package as well.
 
 import os 
-from afm import AFM
+from .afm import AFM
 
 
 AFM_DIR = "Core14_AFMs"
@@ -28,15 +28,38 @@ def loadMetrics(fontName):
     afm = AFM(fh)
     return afm
 
-def inches(s,pt):
-    w,h = metrics.string_width_height(s)
+def stringHeight(s,fontName, pt):
+    fh = open(os.path.join(os.path.dirname(__file__), AFM_DIR, f'{fontName}.afm'), 'rb')
+    afm = AFM(fh)
+
+    _,h = afm.string_width_height(s)
+
+    hInches = h/1000 * pt / 72
+    return hInches
+
+
+def stringWidth(s,fontName, pt):
+    fh = open(os.path.join(os.path.dirname(__file__), AFM_DIR, f'{fontName}.afm'), 'rb')
+    afm = AFM(fh)
+    w,_ = afm.string_width_height(s)
+    wInches = w/1000 * pt / 72
+    return wInches
+
+def inches(s,fontName, pt):
+    fh = open(os.path.join(os.path.dirname(__file__), AFM_DIR, f'{fontName}.afm'), 'rb')
+    afm = AFM(fh)
+    w,h = afm.string_width_height(s)
 
     wInches = w/1000 * pt / 72
     hInches = h/1000 * pt / 72
     return (wInches,hInches) 
 
+
+
+
+
 if __name__ == "__main__":
-    metrics = loadMetrics(HELVETICA)
-    print(inches('X',720))
-    print(inches('x',720))
-    print(inches('I',720))
+    
+    print(inches('X',HELVETICA, 720))
+    print(inches('x',HELVETICA, 720))
+    print(inches('I',HELVETICA, 720))
